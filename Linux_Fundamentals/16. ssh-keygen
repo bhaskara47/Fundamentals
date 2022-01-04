@@ -1,0 +1,15 @@
+# Generating ssh key using two options 1) rsa 2) ed25519
+
+ssh-keygen -t rsa -b 4096 -C “bhadra.mangunuru@gmail.com”     -->  'rsa' key
+ssh-keygen -t ed25519 -b 4096 -C “bhadra.mangunuru@gmail.com  -->  'ed25519' key (More Secure than rsa)
+
+# After Copying the Public keys to VM, find the keys under .ssh/authorized_keys of VM
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub ip_address      -->  Copying Public Key to Virtual Machine
+ssh-copy-id -i ~/.ssh/id_ed25519.pub ip_address  -->  Copying Public Key to Virtual Machine
+
+# Connecting to VM using Private Key and Port
+
+ssh -i ~/.ssh/id_rsa username@ip_address -p 22
+ssh -i ~/.ssh/id_ed25519 username@ip_address -p 22
+

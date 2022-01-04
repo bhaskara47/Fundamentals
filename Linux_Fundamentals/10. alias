@@ -1,0 +1,51 @@
+Steps to create a permanent Bash alias:
+
+1) Edit ~/.bash_aliases or ~/.bashrc file using: vi ~/.bash_aliases
+2) Append your bash alias
+3) For example append: alias update='sudo yum update'
+4) Save and close the file.
+5) Activate alias by typing: source ~/.bash_aliases
+
+*********************************************************************************************************************
+
+alias             --> List alias that were present on system
+alias k="ls -al"  -->  Create alias (No Gaps before and after =)
+unalias k         -->  Delete alias
+
+*********************************************************************************************************************
+
+alias .='cd ../'
+alias ..='cd ../../'
+alias ....='cd ../../../'
+alias c='clear'
+alias l='ls'
+alias k='kubectl'
+alias tf='terraform fmt'
+
+*********************************************************************************************************************
+# cd ../
+alias .='cd ../'
+alias ..='cd ../../'
+alias ....='cd ../../../'
+
+# Only necessary /dev/.. will be displayed
+alias df="df -h -x sqashfs -x tmpfs -x devtmpfs"
+
+# See mount in a Structured way
+alias m="mount | column -t"
+
+# ssh agent
+ssha='eval $(ssh-agent) && ssh-add
+
+# Memory and CPU Usage Processes
+alias tm="ps auxf | sort -nr -k 4 | head -5"    --> Top 5 Processes that were using most Memory in Decreasing Order
+alias tc="ps auxf | sort -nr -k 3 | head -5"    --> Top 5 Processes that were using most CPU in Decreasing Order
+alias bm="ps auxf | sort -nr -k 4 | tail -5"    --> Bottom 5 Processes that were using most Memory in Decreasing Order
+alias bc="ps auxf | sort -nr -k 3 | tail -5"    --> Bottom 5 Processes that were using most CPU in Decreasing Order
+
+# File Space Usage of Directories & Files
+alias tdu='du -cksh * | sort -hr | head -n 5' --> Top 5 Directories/Files with used File Space
+alias bdu='du -cksh * | sort -hr | tail -n 5' --> Bottom 5 Directories/Files with used File Space
+
+
+

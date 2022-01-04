@@ -1,0 +1,49 @@
+# ps command can be used with grep command to search for a particular process
+ps -ef  | grep systemd
+
+# Display only the columns you need
+ps -e -o pid,uname,pcpu,pmem,comm
+
+# Renaming the Output Columns
+ps -e -o pid=PID,uname=USERNAME,pcpu=CPU_USAGE,pmem=MEM_USAGE,comm=COMMAND
+
+# Elapsed time refers to how long the process has been running for
+ps -e -o pid,comm,etime
+
+# To look at what this PID is doing
+ps --quick-pid 1335
+
+ps      --> The ps command without arguments lists the running processes in the current shell
+ps -A   --> To have a glance at all the running processes
+ps -e   --> To have a glance at all the running processes
+ps -T   --> To view processes associated with the terminal run
+ps -a   --> A session leader is a process that starts other processes
+ps -ax  --> To view all current processes
+ps au   --> Display processes in BSD format
+ps aux  --> Display processes in BSD format
+ps -ef  --> To view a full format listing run
+ps -eF  --> To view a full format listing run
+
+ps -u user           -->  list processes associated with a specific user
+ps -L PID            -->  Thread of a particular process
+ps -U root -u root   -->  All processes run by the root user
+ps -fG group_name    -->  list all processes associated by a certain group
+ps -fG groupID       -->  list all processes associated by a certain group  (Example: ps -fG root)
+ps -C process_name   -->  Chances are that usually don’t know the PID to a process. You can search the PID of a process by
+                          running "ps -C bash" for example
+ps -fp PID           -->  Display processes by their PID
+
+
+ps -He    -->  Process Hierarchy (List the Parent Process for each child Process)
+ps -HA    -->  Process Hierarchy (List the Parent Process for each child Process)
+ps -axjf  -->  Process Hierarchy in a better way like tree structure(List the Parent Process for each child Process)
+
+
+ps -f --forest -C bash        -->  Getting to know this parent-child relationship going by the name bash
+ps -o pid,uname,comm -C bash  -->  Display all forked processes belonging to bash
+ps -p pid_no -L               -->  Displays all the threads owned by the process with PID pid_no
+
+
+
+
+

@@ -1,0 +1,53 @@
+# rsync is used to files/folders from one destination to another in same machine or from one to another machine
+# v = verbose --> To visualize the output what exactly going on when you execute the command
+# a = archive mode --> To make sure source & destination are exact match including permissions for folders/files/subfolder
+# z = compress
+# P = To see the Progress
+
+rsync -[options] source destination
+
+=================================================================================================================================
+
+# Syncing Original and Backup folder by copying and deleting
+
+# Copying sync
+rsync -av --dry-run original/ backup/ --> Copy Sync Checking
+rsync -av original/ backup/           --> Copy all files/folder inside original to backup
+
+# Deleting sync
+rsync -av --delete --dry-run original/ backup/  --> Delete Sync Checking
+rsync -av --delete original/ backup/            --> If any files were present in backup folder prior this execution of syntax
+                         --> Those files will be deleting in backup, since it was just syncing both original & backup folders
+
+=================================================================================================================================
+
+# Backing up log files from /var/log to /mnt/mydisk
+
+rsync -av --dry-run /var/log /mnt/mydisk --> Checking
+rsync -av /var/log /mnt/mydisk           --> Implementation
+
+=================================================================================================================================
+
+# Copy Data from Local Server to Remote Server
+# Checking --> rsync should be installed on destination servers before executing the command
+# Also /mnt/mydisk should be present
+
+rsync -av --dry-run /var/log username@ipaddress:/mnt/mydisk --> Checking
+rsync -av /var/log username@ipaddress:/mnt/mydisk           --> Implementation
+
+rsync -av --dry-run /var/log username@ipaddress:  --> Checking (Copying to Home of Username)
+rsync -av /var/log username@ipaddress:            --> Implementation (Copying to Home of Username)
+
+=================================================================================================================================
+
+# Copy Entire Project from Local Server to Remote Server
+
+rsync -zaP --dry-run ~/projects/project-1 username@ip_address:~/projects/project-1 --> Checking
+rsync -zaP ~/projects/project-1 username@ip_address:~/myprojects/project-1         --> Implementation
+
+# Copy Entire Project from Remote Server to Local Server ( We have created a folder in remote and local is not synced)
+
+rsync -zaP --dry-run username@ip_address:~/projects/project-1/backups ~/projects/project-1/  --> Checking
+rsync -zaP username@ip_address:~/projects/project-1/backups ~/projects/project-1/            --> Implementation
+
+=================================================================================================================================

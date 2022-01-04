@@ -1,0 +1,60 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: my-azurefile-sc
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+parameters:
+  skuName: Standard_LRS
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-azurefile-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: my-azurefile-sc
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-files-nginx-deployment
+  labels:
+    app: azure-files-nginx-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: azure-files-nginx-app
+  template:
+    metadata:
+      labels:
+        app: azure-files-nginx-app
+    spec:
+      containers:
+        - name: azure-files-nginx-app
+          image: stacksimplify/kube-nginxapp1:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: my-azurefile-volume
+              mountPath: "/usr/share/nginx/html/app1"
+      volumes:
+        - name: my-azurefile-volume
+          persistentVolumeClaim:
+            claimName: my-azurefile-pvc
+
+

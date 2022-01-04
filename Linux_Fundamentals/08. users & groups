@@ -1,0 +1,82 @@
+# Add, Delete, List Users on Systems
+
+sudo useradd username                                  --> Add User
+sudo useradd -m -s /bin/bash -c "batman User" batman   --> Add User (-m is to Create home directory for user, -s is to create shell and -c is for comment)
+sudo userdel username                                  --> Delete User
+sudo userdel -r username                               --> Delete User & also delete files under home directory of that user
+
+# Will give all of the Users on that System
+cat /etc/passwd
+getent passwd | awk -F: '{ print $1}'
+
+# To see one username out of many
+getent passwd | awk -F: '{ print $1}' | grep -i "username"
+getent passwd | cut -d: -f1 | grep -i "username"
+
+# To see Passwords of Users
+cat /etc/shadow
+
+======================================================================================================================================================================
+
+# Add, Delete, List Groups on Systems
+
+sudo groupadd groupname  --> Add Group
+sudo groupdel groupname  --> Delete Group
+
+sudo usermod -aG groupname username  --> Add User to Group
+sudo gpasswd -d username groupname   --> Delete User from Group
+
+# To see all of the Groups on the System
+cat /etc/group
+getent group | awk -F: '{ print $1}'
+
+# To see one groupname out of many
+getent group | awk -F: '{ print $1}' | grep-i "groupname"
+getent group | cut -d: -f1 | grep -i "groupname"
+
+groups           --> To see groups you are been part of
+id               --> To see groups ids you are been part of
+groups user_name --> To see groups username been part of
+
+======================================================================================================================================================================
+
+# To Modify sudoers file
+
+sudo visudo
+sudo vi /etc/sudoers
+
+======================================================================================================================================================================
+
+# Any Users Which has User_id < 1000 can not show on Login Screen, because these were System Users
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin  --> This User had U_id < 1000; So can not see him in Login Screen
+
+# This is one of the Lines from above command
+azureuser:x:1000:1000:Ubuntu:/home/azureuser:/bin/bash
+
+azureuser:x  --> Username:Password; Since its not ideal to give Password here we referred it as x (x is a file called shadow under /etc/)
+1000:1000    --> User_id:Group_id
+
+======================================================================================================================================================================
+
+# Members of the admin group may gain root privileges
+# %admin ALL=(ALL) ALL
+
+sudo usermod -aG admin user_name
+
+======================================================================================================================================================================
+
+# Allow members of group sudo to execute any command
+# %sudo   ALL=(ALL:ALL) ALL
+
+sudo usermod -aG sudo user_name
+
+======================================================================================================================================================================
+
+sudo su - gani
+
+gani@azureuser
+
+
+
+
+

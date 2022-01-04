@@ -1,0 +1,17 @@
+# scp --> Secure Copy
+
+# Copy file from Local Server to Destination Server
+scp -v /files/sample.txt username@ipaddress:/home/username/documents/
+
+# Copy file from Destination Server to Local Server
+scp -v username@ipaddress:/home/username/documents/sample.txt  /files/
+
+# Copy folder from Local Server to Destination Server
+scp -rv /folders/folder1 username@ipaddress:/home/username/documents/
+scp -rv /folders/test.zip username@ipaddress:/home/username/documents/
+
+# Copy folder from Destination Server to Local Server
+scp -rv username@ipaddress:/home/username/documents/folder1 /folders/
+scp -rv username@ipaddress:/home/username/documents/test.zip /folders/
+
+

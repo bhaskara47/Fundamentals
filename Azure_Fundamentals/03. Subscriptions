@@ -1,0 +1,3 @@
+# choose one subscription out of many available subscriptions in the Azure Account
+
+az account set -s “Subscription_id” (Subscription ID no need to be in ““)

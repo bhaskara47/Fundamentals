@@ -1,0 +1,74 @@
+######
+chown
+######
+# Change ownership of one file from azureuser to batman (-R is to recursively change ownership of files under that directory)
+sudo chown -R batman testfile.txt
+
+# Change ownership of one file from azureuser to batman (-R is to recursively change ownership of files under that directory). And changing the group to batman
+sudo chown -R batman:batman testfile.txt
+
+# Changing back the ownership and group for the file
+sudo chown -R azureuser:azureuser testfile.txt
+
+# Changing back the ownership and group for the file (Default user group)
+sudo chown -R azureuser: testfile.txt
+
+# Changing ownership for a file
+sudo chown username:groupname /opt/logs.sh
+
+=========================================================================================================================================================================
+######
+chmod
+######
+
+# Change Permissions for files
+chmod 0644 testfile.txt         --> File "testfile.txt" will get 664 permissions
+sudo chmod 0644 /opt/folder1/*  --> All files under "folder1" will get 664 permissions
+
+# Change Permissions for folders
+sudo chmod 0644 /opt/folder1/     --> Changing Permissions to Folder, not to files inside folder
+sudo chmod -R 0644 /opt/folder1/  --> Changing Permissions to Folder and files inside folder
+
+# Changing File Permissions using Find
+
+find . -type f -name '*.jpg' -exec chmod 600 {} +                          --> Current Directory
+find home/azureuser/folder1/ -type f -name '*.png' -exec chmod 600 {} +    --> Different folder
+sudo find /opt/az -type d -name az -exec chmod 775 {} +  --> Changing permissions for 'az' folder and need sudo
+
+=========================================================================================================================================================================
+
+# Executable permissions for user
+chmod u+x testfile.txt
+
+# Executable permissions for everybody
+chmod +x testfile.txt
+
+# Remove executable permissions for group and others
+chmod go-x testfile.txt
+
+# Remove read and write permissions for group and others
+chmod go-rw testfile.txt
+
+# Remove every permissions for group and others
+chmod go-rwx testfile.txt
+
+=========================================================================================================================================================================
+
+# Frequently used Permissions
+
+777	(rwxrwxrwx)
+No restrictions on permissions. Anybody may do anything. Generally not a desirable setting.
+775 (rwxrwxr-x)
+Write Permissions restricted to others.
+755	(rwxr-xr-x)
+The files owner may read, write, and execute the file. All others may read and execute the file. This setting is common for programs that are used by all users.
+700	(rwx------)
+The files owner may read, write, and execute the file. Nobody else has any rights. This setting is useful for programs that only the owner may use and must be kept private from others.
+666	(rw-rw-rw-)
+All users may read and write the file.
+644	(rw-r--r--)
+The owner may read and write a file, while all others may only read the file. A common setting for data files that everybody may read, but only the owner may change.
+600	(rw-------)
+The owner may read and write a file. All others have no rights. A common setting for data files that the owner wants to keep private.
+
+=========================================================================================================================================================================

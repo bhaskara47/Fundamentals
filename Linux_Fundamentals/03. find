@@ -1,0 +1,77 @@
+# Find all files end with .txt (In Home azureuser, not only current directory)
+
+find /home/azureuser/ -name *.txt                  --> Files ends with .txt will be found
+find /home/azureuser/ -name *.txt | grep -v .cache --> /home/azureuser/.cache/…. Will be ignored
+
+===================================================================================================================================
+
+# Finding Files and Directories using f and d
+
+find . -name document -type f  --> finding document which is of type file (In current Directory)
+find . -name document -type d  --> finding document which is of type directory (In current Directory)
+
+===================================================================================================================================
+
+# + and \; is to iterate and add files in case of more files find and remove them.
+
+find . -name *.txt -type f -exec rm {} \;  --> Delete files end with .txt in current Directory
+find . -name *.txt -type f -exec rm {} +   --> Delete files end with .txt in current Directory
+
+===================================================================================================================================
+
+# Deleting Log Files --> Means Truncate the file size to 0;
+
+sudo find /etc/log/ -name *.log -type f -exec truncate -s 0 {} +
+
+===================================================================================================================================
+
+# Changing File Permissions using Find
+
+find . -type f -name '*.jpg' -exec chmod 600 {} +
+find . -type f -name '*.png' -exec chmod 600 {} +
+find . -type f -name '*.txt' -exec chmod 700 {} +
+
+===================================================================================================================================
+
+# find and grep together
+
+find -name sample.txt -type f | grep -wnr "john" --> look for word john inside sample.txt
+
+===================================================================================================================================
+
+# find, grep and sed together
+# Replace john in sample.txt with billy
+
+find -name sample.txt -type f | grep -wnr "john" | sed -i "s/john/billy/" sample.txt
+
+===================================================================================================================================
+
+# Use Cases
+
+find . -type d (Find all Directories in the current working directory)
+find . -type f (Find all files in the current working directory)
+find . -type f -name “file1.txt” (Look for a specific file name of file type)
+find . -type f -name “file*” (Look for a specific file name if you don’t know the extension but know file name)
+find . -type f -iname “file*” (Look for a specific file name if you don’t know the extension but know file name ignoring case)
+find . -type f -name “*.txt” (To find all files ending with .txt)
+find . -type f -name “*.pdf” (To find all files ending with .pdf)
+find . -type f -name “*.png” (To find all files ending with .png)
+find . -type f -name “*.jpg” (To find all files ending with .jpg)
+find . -type f -mmin -10 (Find files that were modified max 10 min)
+find . -type f -mmin -60 -mmin +10 (Find files that were modified in less than 10 min and 60 max)
+find . -type f -mtime -10 (Find files that were modified from past 10 days)
+find . -type f -mtime -10 -mtime +2 (Find files that were modified from at least 2 days to max 10 days)
+find . -size -10M (Find files where size is max 10M)
+find . -size +10M  (Find files where size is min 10M)
+find . -size -10k  (Find files where size is max 10k)
+find . -size +10k  (Find files where size is min 10k)
+find . -size -10G  (Find files where size is max 10G)
+find . -size +10kG (Find files where size is min 10G)
+ls -lah dir1/sub1 (To see the file sizes that were present in this path)
+find . -empty (Find empty files in this directory)
+
+===================================================================================================================================
+
+
+
+

@@ -1,0 +1,20 @@
+# zcf --> zip and compress it into a file
+# Here the zipped and compressed file is backup.tar.gz
+# C --> Change the Directory
+# /var/ is the Directory and inside the /var/ log is the main folder that we're trying to zip and compress
+# x --> Extract
+# v --> Verbose (Show the result)
+
+==============================================================================================================
+
+# Creating a zipped and compressed file using tar
+
+tar -zcf backup.tar.gz -C /var/ log
+
+# Extracting the tar file using -x
+# since we zipped and compressed log folder to backup.tar.gz,
+# While we extract backup.tar.gz again --> log folder will be created in the current directory
+
+tar -xzvf backup.tar.gz
+
+==============================================================================================================

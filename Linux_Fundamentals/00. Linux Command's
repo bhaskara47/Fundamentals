@@ -1,0 +1,45 @@
+# Gain Root Access, you will be in ~
+sudo su -
+
+# Gain Root Access, you will be in /home/azureuser/
+sudo su
+
+# To repeat the previous command(most recent)
+!!
+
+# Enter /etc/ but remembers the old path you are working on
+pushd /etc/
+
+# Will take you back from /etc/ to old path you previously working on
+popd
+
+# To Clear the Screen
+clear
+
+# To Clear the Screen, Scroll up to see the history of Commands
+ctrl + l
+
+# Prints Good Morning
+echo "Good Morning"
+
+# Append ls command at the end of the sample.txt file
+echo "ls" >> sample.txt
+
+# Replace the content of sample.txt with ls
+echo "ls" > sample.txt
+
+# Look at OS type of Servers
+
+cat /etc/os-release
+
+
+
+
+
+
+
+
+
+
+
+

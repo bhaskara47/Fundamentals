@@ -1,0 +1,20 @@
+HISTTIMEFORMAT="%m-%d-%Y %T " --> To Set history in Date and Time Format
+history    --> To view the history in Date and Time Format (If 1st command is not set, time & date will not appear)
+!29        --> Execute the 29th Command in History
+
+sudo cat /home/username/.bash_history           --> See Bash History for Other User
+cat /home/username/.bash_history | grep reboot  --> See When did other user performed reboot
+grep -e reboot /home/username/.bash_history     --> See When did other user performed reboot
+
+********************************************************************************************************************
+
+# Check History using egrep
+
+history | egrep 'n'          -->  Words contains 'n' in the history
+history | egrep 'n' | wc -l  -->  No.of Words that contains 'n' in the history
+history | egrep 'n$'         -->  Words end with 'n' in the history
+history | egrep 'n$' | wc -l -->  No.of Words that end with 'n' in the history
+
+********************************************************************************************************************
+
+

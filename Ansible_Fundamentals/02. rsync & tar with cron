@@ -1,0 +1,42 @@
+# Create tar files under the path with date naming
+tar -zcf /home/azureuser/test_folder/daily/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+tar -zcf /home/azureuser/test_folder/weekly/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+tar -zcf /home/azureuser/test_folder/monthly/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+
+# Backup tar files that were only 7 days old, if age > 7 --> Delete the tar files
+find /home/azureuser/test_folder/daily/* -mtime +7 -delete
+
+# Backing up tart files inside daily, weekly and monthly folders by sending them to destination servers using rsync
+# --delete --> if the file is deleted in source then delete it in destination as well
+
+rsync -a --delete /home/azureuser/test_folder/ username@ipaddress:~/backups
+
+=======================================================================================================================
+
+# Creating daily-backup.sh script file (Backing Up only 7 days tar files)
+tar -zcf /home/azureuser/test_folder/daily/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+find /home/azureuser/test_folder/daily/* -mtime +7 -delete
+rsync -a --delete /home/azureuser/test_folder/ username@ipaddress:~/backups
+
+=======================================================================================================================
+
+# Creating weekly-backup.sh script file (Backing Up only 31 days tar files)
+tar -zcf /home/azureuser/test_folder/weekly/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+find /home/azureuser/test_folder/weekly/* -mtime +31 -delete
+
+=======================================================================================================================
+
+# Creating monthly-backup.sh script file (Backing Up only 365 days tar files)
+tar -zcf /home/azureuser/test_folder/monthly/backup-$(date +%Y%m%d).tar.gz -C /var/ log
+find /home/azureuser/test_folder/monthly/* -mtime +365 -delete
+
+=======================================================================================================================
+
+"crontab -e" and add the following lines in the crontab
+
+m  h  dom  moy  dow  command
+15 0  *    *    *    sh /home/azureuser/test_folder/daily-backup.sh  (Daily at 12:30 AM this script will run)
+30 0  *    *    1    sh /home/azureuser/test_folder/weekly-backup.sh (Only Monday at 12:30 AM this script will run)
+45 0  1    *    *    sh /home/azureuser/test_folder/monthly-backup.sh (First day of month at 12:45 AM)
+
+=======================================================================================================================

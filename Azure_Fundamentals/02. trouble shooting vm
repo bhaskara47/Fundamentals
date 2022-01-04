@@ -1,0 +1,50 @@
+Steps to follow:
+
+1)	Does VM is in Running State?
+	Check whether you can Connect to the Virtual Machine with “SSH” (Mostly you can’t)
+
+===================================================================================================================================================================
+2)	Check Whether NIC is Misconfigured?
+	Go Ahead to Portal  VM  Networking  NIC  Settings  IP Configurations
+	If you see “Private IP Address” and “Public IP Address” is assigned to the NIC Card then it’s good, NIC is not Misconfigured.
+	Assuming even after this you can’t ssh into Virtual Machine. “Go to Option 3”
+
+===================================================================================================================================================================
+3)	Check whether traffic is blocked by NSG?
+	Go to Settings  Network Security Group, you could see the NSG is attached to this Virtual Machine.
+	Then look at Networking  Inbound Port Rules, To “SSH” to this VM there should be “Port 22” opened in these Rules.
+	Is there is no such rule created, Create one with
+i)	Add Inbound Port Rule  Source (Any)  Source Port Range (*)  Destination (Any)  Custom (SSH)  Action (Allow)  Priority (100)  Name (ssh-allow).
+	Assuming even after this you can’t ssh into Virtual Machine. “Go to Option 4”
+
+===================================================================================================================================================================
+4)	Check the Response on Run Command?
+	Operations  Run Command  Run Shell script
+	If any application is Running you can check the status of the Application here.
+	Give “ps”  To list all the running Applications on the Virtual Machine.
+	Assuming even after this you can’t ssh into Virtual Machine. “Go to Option 5”
+
+===================================================================================================================================================================
+5)	Serial Console?
+	Serial Console is Direct Access to the Box where your “VM” is running.
+	Perform the following commands in the serial console
+
+vi /etc/fstab (False System Table is a File describing how and where things were mounted)
+
+UUID=1 /foo ext4 0 0 ( If you see something like this delete it)
+
+reboot -f (Rebooting the Machine)
+
+Select Ubuntu in the Next Step
+
+	Assuming even after this you can’t ssh into Virtual Machine. “Go to Option 6”
+
+===================================================================================================================================================================
+6)	Redeploy?
+===================================================================================================================================================================
+
+
+
+
+
+

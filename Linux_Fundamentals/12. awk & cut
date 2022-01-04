@@ -1,0 +1,93 @@
+# file1.txt (Without Comma Separated)
+
+id firstname lastname email country
+1 bhadra mangunuru bhadra@gmail.com india
+2 john chin john@gmail.com china
+3 zach nye zach@gmail.com us
+
+awk 'END {print NR}' file1.txt  -->  No.of Lines in the files
+
+awk '{print}' file1.txt     -->  Print all fields in the file1.txt file
+awk '{print $0}' file1.txt  -->  Print all fields in the file1.txt file
+awk '{print $1}' file1.txt  -->  Print 1st field of each line in the file1.txt file
+
+awk '{print $2,$4}' file1.txt  -->  Print 2nd & 4th field of each line in the file1.txt file
+awk '{print $NF}' file1.txt    --> Prints the final field of each line in file1.txt(NF--> No.of fields)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# file2.txt (With Comma Separated Values)
+
+id,firstname,lastname,email,salary,country
+1,bhadra,mangunuru,bhadra@gmail.com,50000,india
+2,john,chin,john@gmail.com,100000,china
+3,zach,nye,zach@gmail.com,150000,us
+
+
+cut -d, -f 2 file2.txt   -->  Print 2nd field from file2.txt [d for delimiter and f for field]
+
+# Replacing , with a delimiter
+cut -d, -f 1- file2.txt --output-delimiter=" | "
+
+awk 'END {print NR}' file2.txt  -->  No.of Lines in the files
+awk -F, '{print $4}' file2.txt  --> Print 4th Field(email) from file2.txt [-F --> Field]
+
+# Using If Condition
+awk -F, '{if($5>90000) print $0}' file2.txt  --> If salary is >90000 then print all fields
+
+# Replacing filed's using if condition
+awk -F, '{if($2=="bhadra"){$5=200000} print $0}' file2.txt --> If field 2 is bhadra then change salary to 200k
+
+# If line contains India then return it
+awk -F, '/india/ {print $0}' file2.txt
+
+# Add Serial Number
+awk -F, '{print NR ": " $0}' file2.txt
+
+# And Print 2nd Serial Number From Above Result
+awk -F, 'NR=="2" {print $0}' file2.txt
+
+# And Print from 2nd to 4th Serial Number's From Above Result
+awk -F, 'NR=="2",NR=="4" {print $0}' file2.txt
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+############
+# USE CASES
+############
+
+1) Print Line Number's along with the Field's inside it
+
+# file3.txt
+
+firstname
+bhadra
+gani
+durga
+nari
+
+awk '{print NR, $0}' file3.txt      -->  Separate Number and Word with Space
+awk '{print NR ": " $0}' file3.txt  -->  Separate Number and Word with :
+
+awk 'END {print NR}' file3.txt  -->  No.of Lines in the files
+
+cut -c1 file3.txt    -->  Print first word of each line in file3.txt
+cut -c1,4 file3.txt  -->  Print first word and 4th word of each line in file3.txt
+cut -c1-4 file3.txt  -->  Print from 1st - 4th word of each line in file3.txt
+
+2)
+
+ls -l | awk '{print $1,$9}'    --> Prints type & file/directory name (sample_output: -rwxrwxr-x 96 sample.txt)
+ls -l | awk '{print $1,$5,$9}' --> Prints type,size & file/directory name (sample_output: -rwxrwxr-x 96 sample.txt)
+
+
+3)
+
+# Look at Username and SHell for each user in /etc/passwd file
+# F if for for look at the field delimiter :, not the space
+
+awk -F':' '{print $1,$7}' /etc/passwd
+
+4)
+
+echo "Hello from Bhadra" | awk '{print $1,$2}'  --> Hello from
+echo "Hello from Bhadra" | awk '{print $3}'  --> Bhadra

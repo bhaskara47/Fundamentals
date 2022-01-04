@@ -1,0 +1,26 @@
+# -u option requires administrator privileges, so the command is executed using sudo
+
+crontab -e  -->  Edit your crontab
+crontab -l  -->  Display ("list") the contents of your crontab
+crontab -r  -->  Remove your crontab, effectively un-scheduling all crontab jobs
+
+sudo crontab -u username -e  -->  Edit the crontab of the user
+sudo crontab -u username -l  -->  View the crontab of the user
+sudo crontab -u username -r  -->  Remove the crontab of the user
+
+# Logs
+sudo cat /var/log/cron
+sudo tail /var/log/cron
+
+/var/spool/               -->  Crontab files will be here
+/var/spool/cron/crontabs  -->  Crontab files will be here (This is a Sub Directory)
+sudo cd /var/spool/cron/crontabs -->  Look at Crontab files
+
+sudo cat /var/spool/mail/username
+sudo cat /var/spool/cron/username
+
+
+
+
+
+

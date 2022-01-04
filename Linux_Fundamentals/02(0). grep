@@ -1,0 +1,43 @@
+===========================================================================================================================================================
+# -w = Exact word mach;
+# -i = ignore case; -n = numbering;
+# -r = recursive search;
+# -l = No.of files contains search;
+# -c = No.of times your search present in each file
+
+grep "william" names.txt      --> Search for william word (williamson will be included, because it is not exact matching word search)
+grep -w "william" names.txt   --> Search for whole matching word (williamson will be ignored, because it is exact matching word search)
+grep -i "william" names.txt   --> Ignore case while searching (WILLIAM, WILLIAMSON will be included)
+grep -wi "william" names.txt  --> Search for whole word & ignoring case (WILLIAM will be included)
+grep -win "william" names.txt --> Add Numbering to result, Search Only in names.txt file
+grep -win "william" ./* x`      --> Add Numbering to result, Search All files in the Current Directory*/
+
+===========================================================================================================================================================
+
+# Recursive search in current directory (without r this command will not work, since ./ is a directory). Sub folders will be included in the search as well
+
+grep -winr "william" .   --> Recursive Search in Current Directory
+grep -wirl "william" .   --> The -l is returns files that contains the match
+grep -wirc "william" .   --> No.of matches of william in each file
+
+===========================================================================================================================================================
+
+grep -win -A 2 "william" names.txt --> Show 2 lines after the result line
+grep -win -B 2 "william" names.txt --> Show 2 lines before the result line
+grep -win -C 2 "william" names.txt --> Show 2 lines after & before the result line
+grep -win -C 2 "william" ./*       --> Show 2 lines after & before the result line in all files in the current directory*/
+
+===========================================================================================================================================================
+
+grep "...-...-...." names.txt         --> phone numbers in names.txt
+grep -P "\d{3}-\d{3}-\d{4}" names.txt --> phone numbers in names.txt
+grep -rP "\d{3}-\d{3}-\d{4}" .        --> Recursively search for phone numbers in current directory
+grep -rnP "\d{3}-\d{3}-\d{4}" .       --> Add Numbering to Recursive search
+grep -rlP "\d{3}-\d{3}-\d{4}" .       --> No.of files contains phone numbers
+
+===========================================================================================================================================================
+
+
+
+
+

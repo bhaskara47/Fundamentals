@@ -1,0 +1,42 @@
+# Check History using egrep
+
+history | egrep 'n'          -->  Words contains 'n' in the history
+history | egrep 'n' | wc -l  -->  No.of Words that contains 'n' in the history
+history | egrep 'n$'         -->  Words end with 'n' in the history
+history | egrep 'n$' | wc -l -->  No.of Words that end with 'n' in the history
+
+********************************************************************************************************************
+
+grep benz cars.txt                -->  List 1 word at a time from cars.txt
+egrep "dodge|nisson" cars.txt     -->  List 2 words at a time from cars.txt
+egrep "dodge|nisson|bmw" cars.txt -->  List 3 words at a time from cars.txt
+
+egrep "b.*" cars.txt   -->  List words Starts with 'b'
+egrep "b.*w" cars.txt  -->  List words Starts with 'b' and ends with 'w', any no.of characters|alphabets between it
+
+********************************************************************************************************************
+
+# Ignoring Case by adding '-i'
+egrep -i "b.*" cars.txt
+egrep -i "b.*w" cars.txt
+
+# String Contains
+egrep "n" cars.txt    -->  List words that contains letter 'n'
+egrep "[wn]" cars.txt -->  List words that contains letter either 'w' or 'n'
+
+# String Starts
+egrep "^n" cars.txt     -->  List words Starts with 'n'
+egrep "^[wn]" cars.txt  -->  List words that starts with either 'w' or 'n'
+
+# String Ends
+egrep "n$" cars.txt     -->  List words Ends with 'n'
+egrep "[wn]$" cars.txt  -->  List words that Ends with either 'w' or 'n'
+
+********************************************************************************************************************
+
+egrep "ch[ea]vy" cars.txt            -->  List words either chevy ot chavy
+egrep "ch[efdwsefwrewca]vy" cars.txt -->  List the combination of words with ch and vy
+
+********************************************************************************************************************
+
+

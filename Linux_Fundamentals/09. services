@@ -1,0 +1,89 @@
+ps -ef -->  To look at the Running Process
+
+systemctl list-units --type service  -->  Look at all Services (Active, Failed and exited)
+
+systemctl list-units --type service | grep running --> Look at the Running Services
+systemctl list-units --type service | grep failed  --> Look at the Failed Services
+systemctl list-units --type service | grep exited  --> Look at the exited Services
+
+systemctl list-units --type service | grep apache2       --> Check the Status of apache2
+systemctl list-units --type service | grep falcon-sensor --> Check the Status of falcon-sensor
+
+systemctl status apache2        --> Check the Status of apache2 with more details about service
+systemctl status falcon-sensor  --> Check the Status of falcon-sensor with more details about service
+
+==============================================================================================================
+
+# systemctl  --> To Check Service Status etc..
+# journalctl --> Helpful in logs
+
+# systemctl
+systemctl status ssh
+systemctl status apache2
+
+# journalctl and -u for unit (Logs won't be shown with systemctl command as follows)
+journalctl -u ssh      --> If any failed password attempts to login to server, it will be shown here
+journalctl -u ssh -f   --> Follow the live logs for ssh
+journalctl -u apache2
+
+# To see logs since particular date with journalctl
+journalctl --since "2021-11-20 08:00:00"         --> To see all logs from 20th November 8 AM
+journalctl -u ssh --since "2021-11-20 08:00:00"  --> To see ssh logs from 20th November 8 AM
+
+journalctl --since "2021-11-20 08:00:00" > all_logs         --> To save logs to a separate file
+journalctl -u ssh --since "2021-11-20 08:00:00" > ssh_logs  --> To save logs to a separate file
+
+==============================================================================================================
+
+# Check all Available Services
+systemctl list-units --type=service
+
+# Check all Available Services with LOAD and ACTIVE State
+systemctl list-units --type=service | awk '{print $1,$2,$3}'
+
+# Check Jenkins Service LOAD and ACTIVE State
+systemctl list-units --type=service | awk '{print $1,$2,$3}' | grep 'jenkins'
+
+==============================================================================================================
+*********************
+Restarting Zookeeper
+*********************
+
+sudo su -               --> Gaining Root Access, before restart any service
+ps -ef | grep zookeeper --> To see zookeeper running process
+kill 21235              --> To kill the Running zookeeper with an ID (Need Root Access)
+
+# Restart the zookeeper by going to path or execute the following syntax (Need Root Access)
+
+/usr/hdp/2.6.5.1175-1/zookeeper/bin/zookeeper-server start
+
+==============================================================================================================
+*********************
+Restarting OMS Agent
+*********************
+
+sudo /opt/omi/bin/service_control restart                  -->  This will stop and start OMS Agent
+
+sudo tail -f /var/opt/microsoft/omsagent/log/omsagent.log  -->  Watch Live Log's
+
+sudo tail /var/opt/microsoft/omsagent/log/omsagent.log
+
+sudo tail -n 50 /var/opt/microsoft/omsagent/log/omsagent.log  --> First 50 Lines of Log
+
+==============================================================================================================
+
+********
+apache2
+********
+
+systemctl status apache2
+systemctl stop apache2
+systemctl start apache2
+systemctl enable apache2
+systemctl disable apache2
+systemctl restart apache2
+systemctl is-enabled apache2 --> To Check the whether the service is enabled or not
+
+==============================================================================================================
+
+

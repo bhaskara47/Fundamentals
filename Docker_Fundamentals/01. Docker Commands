@@ -1,0 +1,95 @@
++++++++++++++++++
+List Container's
++++++++++++++++++
+docker ps	  -->  List all running containers
+docker ps -a  -->  List all containers stopped, running
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++
+Container Stats
+++++++++++++++++
+sudo docker stats                             --> Display a live stream of container(s) resource usage statistics
+sudo docker stats container_name              --> Display a live stream of container(s) resource usage statistics
+sudo docker stats container_id                --> Display a live stream of container(s) resource usage statistics
+sudo docker stats container_name container_id --> Combining both options will work as well
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++
+Container Logs
++++++++++++++++
+sudo docker container logs logtest
+sudo docker container logs -f logtest
+sudo docker container inspect container_name --> Inspect the Container
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++
+Container Create and Run
+++++++++++++++++++++++++++
+sudo docker container create container_name  --> Just Creating a Container
+sudo docker container run container_name     --> Run = Create + Start the Container
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++
+Container Pause, Unpause and Stop
+++++++++++++++++++++++++++++++++++
+sudo docker container pause container_id
+sudo docker container unpause container_id
+sudo docker container stop container_id
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++
+Container Stop, Start and Restart
+++++++++++++++++++++++++++++++++++
+docker stop container-id	    -->   Stop the container which is running
+docker start container-id	    -->   Start the container which is stopped
+docker restart container-id	    -->   Restart the container which is running
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++
+Remove Containers
+++++++++++++++++++
+docker rm container-id or name     -->  Remove the stopped container
+docker rm -f container-id or name  --> 	Remove the running container forcefully
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++
+Image List, Run, Pull and Remove
++++++++++++++++++++++++++++++++++
+sudo docker images                 --> List the Images
+sudo docker run -it -d image_name  --> Create and Start the Image
+
+docker pull image_name  --> Pull the image from docker hub repository
+docker rmi image_id	    --> Remove the docker image
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++
+Container Command's
++++++++++++++++++++++
+sudo docker container ls     --> To list the details of the container
+sudo docker container ls -a  --> To list all the containers whether they are in “Running”, “Stopped”, “Created” State
+sudo docker container ls -l  --> To see the last created container details
+sudo docker container ls -q  --> To list all the containers in “Running” state.
+sudo docker container ls -aq --> To see only the container ID of all containers
+
+sudo docker container stop $(sudo docker container ls -q)  -->  To stop all the running containers
+sudo docker container rm $(sudo docker container ls -aq)   -->  To delete all containers (Stopped+Running+Exited)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++
+General Docker Command's
++++++++++++++++++++++++++
+docker exec -it container-name /bin/sh	-->   Connect to linux container and execute commands in container
+docker port container-id	            -->   List port mappings of a specific container
+docker top container-id or name	        -->   Display the running processes of a container
+docker login -u username -p password    -->   Login to docker hub
+docker --version                        -->   Show the Docker version information
+docker logout	                        -->   Logout from docker hub
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++
+Docker Path
++++++++++++++
+sudo ls /var/lib/docker             -->  Containers, Images and all docker related stuff
+ls -lrt /var/lib/docker/containers  -->  To see the containers that were created previously
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

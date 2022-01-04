@@ -1,0 +1,5 @@
+hostname -f  -->  Gives the Hostname of the Server ( Ex: azureuser.w241u251m0hellase23yrioatd.bx.internal.cloudapp.net )
+
+# Look at OS type of Servers
+
+cat /etc/os-release

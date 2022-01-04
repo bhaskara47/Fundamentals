@@ -1,0 +1,29 @@
+# syslog is the system logs, every activity performed on the system will be recorded init
+# Generally these syslog will be rotated as logs increase inside in it and create new files with same extension
+cat /var/log/syslog
+
+head /var/log/syslog  --> First 10 Lines of the syslog file
+tail /var/log/syslog  --> Last 10 Lines of the syslog file
+head -n 50 /var/log/syslog  --> First 50 Lines of the syslog file
+tail -n 50 /var/log/syslog  --> Last 50 Lines of the syslog file
+head -f /var/log/syslog     --> -f is for following, you can see live logs generated
+tail -f /var/log/syslog     --> -f is for following, you can see live logs generated
+
+==================================================================================================================
+
+# journalctl will provide better details than using grep (Logs won't be shown with systemctl command as follows)
+journalctl -u ssh              --> Logs related to ssh
+cat /var/log/syslog | grep ssh --> Logs related to ssh
+journalctl -u apache2          --> Logs related to apache2
+journalctl -fu apache2         --> Follow the live logs related to apache2
+
+==================================================================================================================
+
+# To see logs since particular date with journalctl
+journalctl --since "2021-11-20 08:00:00"         --> To see all logs from 20th November 8 AM
+journalctl -u ssh --since "2021-11-20 08:00:00"  --> To see ssh logs from 20th November 8 AM
+
+journalctl --since "2021-11-20 08:00:00" > all_logs         --> To save logs to a separate file
+journalctl -u ssh --since "2021-11-20 08:00:00" > ssh_logs  --> To save logs to a separate file
+
+==================================================================================================================

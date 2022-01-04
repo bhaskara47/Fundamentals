@@ -1,0 +1,65 @@
+lsblk  --> Show Partitions among disks
+df -h  --> Show Partitions among disks
+mount  --> will allow to Mount file systems to the linux system
+
+"mount | column -t" --> See mount in a Structured way
+mount | grep sdb    --> To see mountpoint for sdb
+sudo fdisk -l       --> Show Units, Sector size, I/O size in bytes
+
+lsblk -o NAME,SIZE,MOUNTPOINT  --> Show only three columns in lsblk output
+
+lsblk | grep -i "sd"                          --> To see Disks that starts with sd
+lsblk -o NAME,SIZE,MOUNTPOINT | grep -i "sd"  --> To see Disks that starts with sd
+
+=============================================================================================================================
+
+# Mounting Disk
+
+# fstab is the file where you write configurations for mounting disks
+sudo cat /etc/fstab
+
+# Creating a folder that needs to be mounted ( /mnt will be there in linux default, you just create mydisk folder)
+sudo mkdir /mnt/mydisk
+
+# To see UUID for /dev/sdb1 ( /dev/sdb1 is where mydisk will be mounted to )
+sudo blkid
+
+# Get that UUID and Perform the following steps
+sudo vi /etc/fstab
+UUID=" " /mnt/mydisk ext4 defaults,ro 0 2
+
+# UUID of Partition
+# /mnt/mydisk --> Path that needs to be mounted on,
+# ext4 --> File System type
+# defaults --> All of the rest will be default
+# ro --> Read Only. You do not want everybody to modify content of disk.
+# 2 is the Priority in which order the check should be made in case of damage
+
+# This syntax will mount mydisk to sdb1
+sudo mount /mnt/mydisk
+
+#This will not only mount mydisk to sdb1, but if any other cases like this in one syntax
+sudo mount -a
+
+=============================================================================================================================
+
+# Output of following syntax will be /dev/sdb1 on /mnt/mydisk type ext4 (rw,relatime)
+cat /etc/fstab | grep mydisk
+
+# If you do not want your disk to be automatically mounted when doing sudo mount -a, only sudo mount /mnt/mydisk works here
+UUID=" " /mnt/mydisk ext4 defaults,ro,noauto 0 2
+
+# Unmounting sdb1
+sudo umount /dev/sdb1
+
+=============================================================================================================================
+
+
+
+
+
+
+
+
+
+

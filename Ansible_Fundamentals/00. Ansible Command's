@@ -1,0 +1,27 @@
+# Copy Public key to hosts
+
+ssh-copy-id root@ip_address
+
+# -bkK -->  To ask the Password instead of storing the Password inside the hosts file
+
+ansible-playbook -i hosts main.yml -bkK --check   -->   Checking on all hosts
+ansible-playbook -i hosts main.yml -bkK           -->   Execution on all hosts
+
+# Execute on hosts using '*'
+
+ansible-playbook -i hosts -l prod* main.yml -bkK --check   -->   Checking only on hostname starts with prod.....
+ansible-playbook -i hosts -l prod* main.yml -bkK           -->   Execution only on hostname starts with prod.....
+
+ansible-playbook -i hosts -l prod*,dev* main.yml -bkK --check --> Checking only on hostname starts with prod*,dev*
+ansible-playbook -i hosts -l prod*,dev* main.yml -bkK         --> Execution only on hostname starts with prod*,dev*
+
+
+# Execution including 'tags'
+
+ansible-playbook -i hosts main.yml --tags 'tag_name'-bkK --check   -->   Checking on hosts using the script under 'tag_name'
+ansible-playbook -i hosts main.yml --tags 'tag_name'-bkK           -->   Executing on hosts using the script under 'tag_name'
+
+# Execution excluding 'tags'
+
+ansible-playbook -i hosts main.yml --skip-tags 'tag_name'-bkK --check   -->   Checking on hosts except the script under 'tag_name'
+ansible-playbook -i hosts main.yml --skip-tags 'tag_name'-bkK           -->   Executing on hosts except the script under 'tag_name'

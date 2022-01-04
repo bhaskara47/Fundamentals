@@ -1,0 +1,34 @@
+ps -ef  --> Look at the running Processes
+
+df -h   --> See Available and Consumed Memory on the Machine
+free    --> See Available and Consumed Memory on the Machine
+free -m --> See Available and Consumed Memory on the Machine in MB
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++
+MEMORY & CPU USAGE
++++++++++++++++++++
+# Preferred Method and visualization is better than using auxf
+
+ps -e -o pid,uname,pcpu,pmem,comm | sort -nr -k 4 | head -5   -->  Top 5 Processes that were using most Memory
+ps -e -o pid,uname,pcpu,pmem,comm | sort -nr -k 3 | head -5   -->  Top 5 Processes that were using most CPU
+ps -e -o pid,uname,pcpu,pmem,comm | sort -nr -k 4 | tail -5   -->  Bottom 5 Processes that were using most Memory
+ps -e -o pid,uname,pcpu,pmem,comm | sort -nr -k 3 | tail -5   -->  Bottom 5 Processes that were using most CPU
+
+ps auxf | sort -nr -k 4 | head -5   -->  Top 5 Processes that were using most Memory in Descending Order
+ps auxf | sort -nr -k 3 | head -5   -->  Top 5 Processes that were using most CPU in Descending Order
+ps auxf | sort -nr -k 4 | tail -5   -->  Bottom 5 Processes that were using most Memory in Descending Order
+ps auxf | sort -nr -k 3 | tail -5   -->  Bottom 5 Processes that were using most CPU in Descending Order
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# File Space Usage of Directories & Files
+
+du -cksh * | sort -hr  --> Directories/Files with used File Space in Descending Order
+
+du -cksh * | sort -hr | head -n 5   -->  Top 5 Directories/Files with used File Space
+du -cksh * | sort -hr | head -n 10  -->  Top 10 Directories/Files with used File Space
+du -cksh * | sort -hr | tail -n 5   -->  Bottom 5 Directories/Files with used File Space
+du -cksh * | sort -hr | tail -n 10  -->  Bottom 10 Directories/Files with used File Space
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

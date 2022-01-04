@@ -1,0 +1,35 @@
+# Print goodbye
+# Actually echo should print hello, but sed changed that output to goodbye
+
+echo "hello" | sed "s/hello/goodbye/"
+
+==============================================================================================================
+
+# -i is for input file at the end of syntax; Here it is sample.txt
+
+sed -i 's/john/billy/' sample.txt    --> Replace the occurrence of john with billy in sample.txt file
+sed -i -r 's/john/billy/' sample.txt --> Replace the occurrence of john with billy in sample.txt file
+sed -i 's/etc/stuff/' hosts          --> Replace the occurrence of /etc with /stuff in hosts file
+sed -i 's./etc..' hosts              --> Remove /etc/ at the Beginning  of each line in hosts file
+
+==============================================================================================================
+
+# -i is input file
+# -r forces sed to use an extended regular syntax
+#  1 is for every occurrence of search word
+
+# Replace gmail.com with example.com, original file will be changes
+
+sed -i -r 's/^(john|billy)@.*gmail\.com/\1@example.com/' ./sample.txt
+
+# Send the output to modified_sample.txt file, original file will not change unlike previous command
+
+cat sample.txt | sed -r 's/^(john|billy)@.*gmail\.com/\1@example.com/' > ./modified_sample.txt
+
+==============================================================================================================
+
+
+
+
+
+
